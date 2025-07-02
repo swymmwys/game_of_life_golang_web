@@ -10,6 +10,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: `/${process.env.gh_repo.split('/')[1]}/`,
   plugins: [
     viteStaticCopy({
       targets: [
