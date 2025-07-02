@@ -1,19 +1,9 @@
 package main
 
-import "fmt"
-
 type Cell struct {
 	x   int
 	y   int
 	val bool
-}
-
-func (cell *Cell) print() {
-	if cell.val {
-		fmt.Print(("■ 1"))
-	} else {
-		fmt.Print(("□ 0"))
-	}
 }
 
 type GameField [][]Cell
@@ -28,8 +18,6 @@ func (gf *GameField) iterate() bool {
 
 	for _, row := range *gf {
 		for _, cell := range row {
-			// cell.print()
-
 			n := gf.countNeighbors(&cell)
 
 			if cell.val && (n > 3 || n < 2) {
@@ -40,13 +28,7 @@ func (gf *GameField) iterate() bool {
 				newborn = append(newborn, &cell)
 			}
 		}
-
-		fmt.Println()
 	}
-
-	fmt.Println()
-	fmt.Println("-------------------------")
-	fmt.Println()
 
 	contin := false
 
