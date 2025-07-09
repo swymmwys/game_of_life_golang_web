@@ -9,10 +9,9 @@ export const GameFieldStyled = styled.div<{ size: number }>`
   --size: ${(props) => props.size};
   --base-gap: 4px;
   --field-gap: calc(var(--base-gap) * clamp(0.2, calc(15 / var(--size)), 1));
-  --min-dimension: min(85vh, 85vw);
   --available-space: max(
-    350px,
-    calc(var(--min-dimension) - var(--field-gap) * calc(var(--size) - 2))
+    250px,
+    calc(85cqmin - var(--field-gap) * calc(var(--size) - 2))
   );
   --cell-size: calc(var(--available-space) / var(--size));
   display: grid;
