@@ -31,13 +31,12 @@ jobs:
         with:
           node-version: 24.x
           cache: npm
-          cache-dependency-path: 'ui_web/package-lock.json'
+          cache-dependency-path: 'package-lock.json'
 
       - name: Build UI project # go impl builds internally with vite plugin
         env:
           gh_repo: ${{ github.repository }}
         run: |
-          cd ui_web
           npm install
           npm run build
 
