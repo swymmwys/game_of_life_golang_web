@@ -1,18 +1,11 @@
 import { styled } from "@linaria/react";
-import { type FC, type MouseEventHandler } from "react";
+import type { FC, MouseEventHandler } from "react";
 import type { ReadonlyCell } from "../Game.ts";
 
 export const CellStyled = styled.button`
-  --box-shadow-color: #3f3f3f;
   border: none;
   padding: 0;
   border-radius: 20%;
-  transition: box-shadow 0.5s linear;
-
-  &:hover {
-    --box-shadow-color: #009bff;
-    transition: box-shadow 0.2s linear;
-  }
 
   &[data-active="true"] {
     background-color: hsl(0, 0%, 100%);
@@ -22,7 +15,11 @@ export const CellStyled = styled.button`
 
   &[data-active="false"] {
     background-color: hsl(0, 0%, 0%);
-    box-shadow: inset var(--box-shadow-color) 0 -1px 1px 0px;
+    box-shadow: inset #3f3f3f 0 -1px 1px 0;
+  }
+
+  &:hover {
+    box-shadow: inset #009bff 0 -1px 1px 0;
   }
 
   @keyframes bounce {

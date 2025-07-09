@@ -11,7 +11,7 @@ export const GameFieldStyled = styled.div<{ size: number }>`
   --field-gap: calc(var(--base-gap) * clamp(0.2, calc(15 / var(--size)), 1));
   --min-dimension: min(85vh, 85vw);
   --available-space: max(
-    450px,
+    350px,
     calc(var(--min-dimension) - var(--field-gap) * calc(var(--size) - 2))
   );
   --cell-size: calc(var(--available-space) / var(--size));
@@ -21,7 +21,7 @@ export const GameFieldStyled = styled.div<{ size: number }>`
   grid-template-rows: repeat(var(--size), var(--cell-size));
 
   @media (max-width: 800px) or (max-height: 800px) {
-    --base-gap: 2px;
+    --base-gap: 1px;
   }
 `;
 
@@ -39,16 +39,22 @@ export const GameField: FC = () => {
   );
 
   return (
-    <GameFieldStyled size={game.size}>
-      {game.field.map((cell) => {
-        return (
-          <Cell
-            onClick={onCellClick}
-            key={`x:${cell.x}y:${cell.y}`}
-            cell={cell}
-          />
-        );
-      })}
-    </GameFieldStyled>
+    <>
+      {game.size === 0 ? (
+        "Loading..."
+      ) : (
+        <GameFieldStyled size={game.size}>
+          {game.field.map((cell) => {
+            return (
+              <Cell
+                onClick={onCellClick}
+                key={`x:${cell.x}y:${cell.y}`}
+                cell={cell}
+              />
+            );
+          })}
+        </GameFieldStyled>
+      )}
+    </>
   );
 };

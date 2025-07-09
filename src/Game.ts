@@ -1,4 +1,6 @@
 import { type IObservableValue, observable, runInAction } from "mobx";
+import "@wasm/wasm_exec";
+import wasmUrl from "@wasm/main.wasm?url";
 
 interface GoBackendImpl {
   initGame(w: number, h: number): void;
@@ -107,9 +109,9 @@ export class GameDefault implements Game {
     this._initResolvers = Promise.withResolvers<void>();
 
     try {
-      const go = new Go();
+      const go = new window.Go();
       const result = await WebAssembly.instantiateStreaming(
-        fetch("main.wasm"),
+        fetch(wasmUrl),
         go.importObject,
       );
       void go.run(result.instance); // it never resolves
@@ -132,8 +134,8 @@ export class GameDefault implements Game {
       runInAction(() => {
         this._syncGameState();
       });
-    } catch {
-      this._initResolvers.reject();
+    } catch (error) {
+      this._initResolvers.reject(error);
     }
 
     this._initResolvers.resolve();
